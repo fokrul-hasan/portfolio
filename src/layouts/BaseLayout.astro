@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Fokrul Hasan</a>
+  <ul>
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/#blog">Blog</a></li>
+    <li><a href="/#recipes">Recipes</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a href="/fokrul_hasan_resume.html" class="nav-resume">Resume ↗</a>
+</nav>
+
+<slot />
+
+<footer>&copy; 2026 Md. Fokrul Hasan &middot; Dhaka, Bangladesh &middot; <a href="/fokrul_hasan_resume.html">Resume</a></footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+</script>
+</body>
+</html>

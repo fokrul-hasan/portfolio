@@ -1,0 +1,105 @@
+:root {
+  --ink: #131E2B;
+  --paper: #EEF2F6;
+  --accent: #2C5C8A;
+  --accent-light: #4C7FAD;
+  --muted: #63707D;
+  --rule: #CBD8E3;
+  --highlight: #DCE7F1;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", sans-serif; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.7; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 3rem; background: rgba(245,239,230,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+nav .logo { font-family: "DM Serif Display", serif; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+nav ul { list-style: none; display: flex; gap: 2rem; }
+nav ul a { text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+nav ul a:hover { color: var(--accent); }
+.nav-resume { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent); border: 1.5px solid var(--accent); padding: 0.35rem 0.85rem; border-radius: 2px; text-decoration: none; transition: all 0.2s; }
+.nav-resume:hover { background: var(--accent); color: white; }
+@media (max-width: 768px) { nav ul { display: none; } nav { padding: 0.75rem 1.5rem; } }
+
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 3rem 4rem; max-width: 1100px; margin: 0 auto; }
+.hero-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; }
+.hero-eyebrow::before { content: ""; display: inline-block; width: 32px; height: 1px; background: var(--accent-light); }
+.hero h1 { font-family: "DM Serif Display", serif; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.1; color: var(--ink); margin-bottom: 1.4rem; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-summary { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 580px; margin-bottom: 2.5rem; }
+.hero-nav-pills { display: flex; gap: 1rem; flex-wrap: wrap; }
+.pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; border-radius: 2px; text-decoration: none; transition: all 0.2s; border: 1.5px solid var(--rule); color: var(--ink); background: white; }
+.pill:hover { border-color: var(--accent); color: var(--accent); background: var(--highlight); transform: translateY(-1px); }
+.pill-icon { font-size: 1rem; }
+
+section { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+section + section { padding-top: 0; }
+.section-label { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.5rem; }
+.section-title { font-family: "DM Serif Display", serif; font-size: 2rem; color: var(--ink); margin-bottom: 3rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+.project-card { background: white; border: 1px solid var(--rule); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.8rem; transition: box-shadow 0.2s, transform 0.2s; }
+.project-card:hover { box-shadow: 0 6px 24px rgba(123,79,46,0.1); transform: translateY(-2px); }
+.project-tag { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-light); }
+.project-title { font-family: "DM Serif Display", serif; font-size: 1.25rem; color: var(--ink); line-height: 1.25; }
+.project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; flex: 1; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.stack-badge { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.06em; padding: 0.2rem 0.6rem; background: var(--highlight); color: var(--accent); border-radius: 2px; text-transform: uppercase; }
+.project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 600; color: var(--accent); text-decoration: none; margin-top: 0.4rem; letter-spacing: 0.04em; border-bottom: 1px solid transparent; transition: border-color 0.2s; align-self: flex-start; }
+.project-link:hover { border-color: var(--accent); }
+.project-link::after { content: "↗"; font-size: 0.75rem; }
+
+.blog-list { display: flex; flex-direction: column; gap: 0; }
+.blog-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; padding: 1.75rem 0; border-bottom: 1px solid var(--rule); align-items: start; transition: background 0.15s; }
+.blog-item:first-child { border-top: 1px solid var(--rule); }
+.blog-date { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; color: var(--accent-light); letter-spacing: 0.06em; padding-top: 0.15rem; }
+.blog-content-title { font-family: "DM Serif Display", serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.3; }
+.blog-excerpt { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+.blog-read { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; color: var(--accent); text-decoration: none; letter-spacing: 0.04em; }
+.blog-read::after { content: "→"; }
+.blog-read:hover { opacity: 0.75; }
+.blog-topic { font-family: "JetBrains Mono", monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: white; background: var(--accent); padding: 0.15rem 0.55rem; border-radius: 2px; display: inline-block; margin-bottom: 0.5rem; }
+
+.recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+.recipe-card { border: 1px solid var(--rule); background: white; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; display: block; text-decoration: none; color: inherit; }
+.recipe-card:hover { box-shadow: 0 6px 24px rgba(123,79,46,0.1); transform: translateY(-2px); }
+.recipe-thumb-placeholder { width: 100%; height: 140px; background: var(--highlight); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+.recipe-body { padding: 1.25rem 1.4rem; }
+.recipe-cuisine { font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.4rem; }
+.recipe-name { font-family: "DM Serif Display", serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.25; }
+.recipe-note { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.85rem; }
+.recipe-meta { display: flex; align-items: center; justify-content: space-between; }
+.recipe-time { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; color: var(--muted); }
+.recipe-link { font-size: 0.78rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+
+.contact-strip { background: var(--accent); color: white; padding: 4rem 3rem; }
+.contact-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+.contact-title { font-family: "DM Serif Display", serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.contact-sub { font-size: 0.85rem; opacity: 0.75; }
+.contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+.contact-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.4rem; border: 1.5px solid rgba(255,255,255,0.4); color: white; text-decoration: none; font-size: 0.82rem; font-weight: 500; border-radius: 2px; transition: all 0.2s; }
+.contact-link:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--rule); }
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* Single post/recipe page */
+.post-header { max-width: 800px; margin: 0 auto; padding: 7rem 3rem 2rem; }
+.post-header .back-link { font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--accent); text-decoration: none; }
+.post-header h1 { font-family: "DM Serif Display", serif; font-size: 2.2rem; margin: 1rem 0 0.5rem; }
+.post-body { max-width: 800px; margin: 0 auto; padding: 0 3rem 5rem; font-size: 1rem; line-height: 1.85; }
+.post-body h2 { font-family: "DM Serif Display", serif; font-size: 1.4rem; margin: 2rem 0 1rem; }
+.post-body ul, .post-body ol { margin: 0.5rem 0 1rem 1.5rem; }
+.post-body p { margin-bottom: 1rem; }
+
+@media (max-width: 768px) {
+  .hero { padding: 5rem 1.5rem 3rem; }
+  section { padding: 3rem 1.5rem; }
+  .blog-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  .contact-inner { flex-direction: column; }
+  .post-header, .post-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }

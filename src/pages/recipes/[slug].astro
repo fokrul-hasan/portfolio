@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.slug },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await recipe.render();
+---
+<BaseLayout title={`${recipe.data.name} — Fokrul Hasan`}>
+  <div class="post-header">
+    <a href="/#recipes" class="back-link">← Back to Recipes</a>
+    <div style="font-size: 3rem; margin-top: 1rem;">{recipe.data.emoji}</div>
+    <h1>{recipe.data.name}</h1>
+    <div class="blog-date">{recipe.data.cuisine} &middot; ⏱ {recipe.data.time}</div>
+  </div>
+  <div class="post-body">
+    <Content />
+  </div>
+</BaseLayout>

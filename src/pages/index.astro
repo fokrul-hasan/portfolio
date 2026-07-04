@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/projects.js';
+
+// Pulls every .md file from src/content/blog/, newest first
+const allPosts = await getCollection('blog');
+allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Pulls every .md file from src/content/recipes/
+const allRecipes = await getCollection('recipes');
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+---
+<BaseLayout title="Fokrul Hasan — Works & Finds">
+
+  <div class="hero" id="hero">
+    <div class="hero-eyebrow">Works &amp; Finds</div>
+    <h1>Things I've built,<br>written, &amp; <em>loved.</em></h1>
+    <p class="hero-summary">A personal collection — web projects I've shipped, articles I've written, and recipes I keep coming back to. Pull up a chair.</p>
+    <div class="hero-nav-pills">
+      <a href="#projects" class="pill"><span class="pill-icon">⌨</span> Web Projects</a>
+      <a href="#blog" class="pill"><span class="pill-icon">✦</span> Blog Posts</a>
+      <a href="#recipes" class="pill"><span class="pill-icon">◎</span> Favorite Recipes</a>
+    </div>
+  </div>
+
+  <!-- WEB PROJECTS -->
+  <section id="projects">
+    <div class="reveal">
+      <div class="section-label">Built &amp; Shipped</div>
+      <div class="section-title">Web Projects</div>
+    </div>
+    <div class="projects-grid">
+      {projects.map((p) => (
+        <div class="project-card reveal">
+          <div class="project-tag">{p.tag}</div>
+          <div class="project-title">{p.title}</div>
+          <div class="project-desc">{p.desc}</div>
+          <div class="project-stack">
+            {p.stack.map((s) => <span class="stack-badge">{s}</span>)}
+          </div>
+          <a href={p.link} class="project-link">View Project</a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="reveal">
+      <div class="section-label">Writing</div>
+      <div class="section-title">Blog Posts</div>
+    </div>
+    <div class="blog-list">
+      {allPosts.map((post) => (
+        <div class="blog-item reveal">
+          <div class="blog-date">{formatDate(post.data.date)}</div>
+          <div>
+            <div><span class="blog-topic">{post.data.topic}</span></div>
+            <div class="blog-content-title">{post.data.title}</div>
+            <div class="blog-excerpt">{post.data.excerpt}</div>
+            <a href={`/blog/${post.slug}/`} class="blog-read">Read Post</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- RECIPES -->
+  <section id="recipes">
+    <div class="reveal">
+      <div class="section-label">From the Kitchen</div>
+      <div class="section-title">Favorite Recipes</div>
+    </div>
+    <div class="recipes-grid">
+      {allRecipes.map((recipe) => (
+        <a href={`/recipes/${recipe.slug}/`} class="recipe-card reveal">
+          <div class="recipe-thumb-placeholder">{recipe.data.emoji}</div>
+          <div class="recipe-body">
+            <div class="recipe-cuisine">{recipe.data.cuisine}</div>
+            <div class="recipe-name">{recipe.data.name}</div>
+            <div class="recipe-note">{recipe.data.note}</div>
+            <div class="recipe-meta">
+              <span class="recipe-time">⏱ {recipe.data.time}</span>
+              <span class="recipe-link">See Recipe →</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact-strip" id="contact">
+    <div class="contact-inner">
+      <div>
+        <div class="contact-title">Say hello.</div>
+        <div class="contact-sub">Whether it's about my work, a collab idea, or you just tried one of the recipes — I'd love to hear from you.</div>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:fokrul.hh@gmail.com" class="contact-link">✉ fokrul.hh@gmail.com</a>
+        <a href="https://www.linkedin.com/in/fokrulhasan/" target="_blank" class="contact-link">in LinkedIn ↗</a>
+        <a href="/fokrul_hasan_resume.html" class="contact-link">Resume ↗</a>
+      </div>
+    </div>
+  </div>
+
+</BaseLayout>
